@@ -21,7 +21,7 @@ int main(){
         game.play(player1);
         
         if(game.fourToWin(player1)==true){
-            std::cout<<"-Player 1 wins!\n";
+            std::cout<<"-Player 1 wins! \n";
             break;
         }
 
