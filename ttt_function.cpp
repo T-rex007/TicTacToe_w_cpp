@@ -6,7 +6,7 @@ bool checkColumn(char board[4][4], char ox);
 
 bool checkRow(char board[4][4], char ox){
     bool check = true;
-    for(int i= 0; i<4;){
+    for(int i= 0; i<4;i++){
         check = true;
         for(int j =0;j<4; j++){
             if(board[i][j] != ox){
@@ -25,9 +25,10 @@ bool checkRow(char board[4][4], char ox){
     }
     return check;
 }
+
 bool checkColumn(char board[4][4], char ox){
     bool check =true;
-    for(int i= 0; i<4;){
+    for(int i= 0; i<4;i++){
         check = true;
         for(int j =0;j<4; j++){
             if(board[j][i] != ox){
@@ -66,7 +67,7 @@ bool checkNonLeadDiagonal(char board[4][4], char ox){
     int column =3;
     int check = true;
     while(row<4){
-        if(board[row][column] !='ox'){
+        if(board[row][column] !=ox){
             check = false;
             break;
         }
@@ -76,5 +77,3 @@ bool checkNonLeadDiagonal(char board[4][4], char ox){
     }
     return check;
 }
-
-
