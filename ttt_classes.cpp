@@ -21,6 +21,7 @@ public:
 
 Tictactoe::Tictactoe()
 {
+    //Contructor method - initializes gameBoard
     for(int row = 0; row<4;row++){
         std::cout<<std::setw(5);
         for(int column =0 ;column<4;column++){
@@ -49,7 +50,7 @@ bool Tictactoe::isPlaceEmpty(int row, int column){
     return check;
 }
 void Tictactoe::play(char ox){
-    /*Play your position on board*/
+    /*Play a position on board*/
     int row;
     int column;
     std::cin>>row;
@@ -84,6 +85,7 @@ void Tictactoe::printBoard(){
     std::cout<<std::endl;
 }
 bool Tictactoe::fourToWin(char ox){
+    // Check to see if a player wins
     bool checkList[4] = {checkRow(gameBoard , ox ), checkColumn(gameBoard , ox ),
      checkLeadDiagonal(gameBoard , ox ), checkNonLeadDiagonal(gameBoard , ox )};
     std::cout<<checkList[0];

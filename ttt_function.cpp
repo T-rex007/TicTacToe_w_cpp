@@ -1,3 +1,6 @@
+/*Author: Tyrel Cadogan
+  Email: shaqc777@yahoo.com/tyrel.cadogan@my.uwi.edu
+*/
 bool checkLeadDiagonal(char board[4][4], char ox);
 bool checkNonLeadDiagonal(char board[4][4], char ox);
 bool checkRow(char board[4][4], char ox);

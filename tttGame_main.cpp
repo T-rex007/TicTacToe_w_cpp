@@ -1,3 +1,6 @@
+/*Author: Tyrel Cadogan
+  Email: shaqc777@yahoo.com/tyrel.cadogan@my.uwi.edu
+  */
 #include <string>
 #include "ttt_classes.cpp"
 
@@ -11,7 +14,7 @@ int main(){
     char player2 = 'x';
     bool gamePlay = true;
     Tictactoe game;
-    
+
     while(gamePlay ==true){
 
         std::cout<<"-Player 1's turn. Your symbol is '" <<player1<<"'\n";
