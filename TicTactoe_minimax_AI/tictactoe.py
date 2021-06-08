@@ -7,6 +7,7 @@ Github: https://github.com/T-rex007
 
 import math
 import numpy as np
+import sys
 
 X = "X"
 O = "O"
@@ -40,11 +41,6 @@ def player(board):
         return X
     else:
         return O
-
-       
-
-    # raise NotImplementedError
-
 
 def actions(board):
     """
@@ -103,9 +99,6 @@ def winner(board):
 
 
 
-    # raise NotImplementedError
-
-
 def terminal(board):
     """
     Returns True if game is over, False otherwise.
@@ -127,13 +120,39 @@ def utility(board):
         return -1
     return 0
 
+def max_value(board):
+    """
+    Returns the action with the largest value of min_value 
+    """
+    if terminal(board):
+        return utility(board)
+    # Lowest possible number
+    v = -sys.maxint
+    for action in actions(board):
+        v = max(v, min_value(result(board, action)))
+    return v
 
+def min_value(board):
+    """
+    Returns the smallest value that produces the smallest value of max_value
+    """
+    if terminal(board):
+        return utility
+    v = sys.maxint
+    for action in actions(board):
+        v = min(v, max_value(result(board, action)))
+    return v
 
 def minimax(board):
     """
     Returns the optimal action for the current player on the board.
     """
-    raise NotImplementedError
+    if(player(board) == X):
+        return max_value
+    elif(player(board) == O):
+        return min_value
+    else:
+        raise ValueError
 
 
 if __name__ == "__main__":
