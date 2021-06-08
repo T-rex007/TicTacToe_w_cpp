@@ -6,6 +6,7 @@ Github: https://github.com/T-rex007
 """
 
 import math
+import numpy as np
 
 X = "X"
 O = "O"
@@ -16,9 +17,9 @@ def initial_state():
     """
     Returns starting state of the board.
     """
-    return [[EMPTY, EMPTY, EMPTY],
-            [EMPTY, EMPTY, EMPTY],
-            [EMPTY, EMPTY, EMPTY]]
+    return np.array([[EMPTY, EMPTY, EMPTY],
+                     [EMPTY, EMPTY, EMPTY],
+                     [EMPTY, EMPTY, EMPTY]])
 
 
 def player(board):
@@ -35,7 +36,7 @@ def player(board):
             elif(board[row][columns] == O):
                 o_times += 1
     
-    if(((x_times%2) ==1) or ((x_times%2) == 0)):
+    if( (((x_times+o_times)%2) == 0)):
         return X
     else:
         return O
@@ -51,9 +52,9 @@ def actions(board):
     """
     action_set = set()
     for row in range(len(board)):
-        for columns in range(len(board[0])):
-            if(board[row][columns] == EMPTY):
-                action_set.add(row,column)
+        for column in range(len(board[0])):
+            if(board[row][column] == EMPTY):
+                action_set.add((row,column))
     return action_set
 
     # raise NotImplementedError
@@ -71,33 +72,32 @@ def result(board, action):
 def winner(board):
     """
     Returns the winner of the game, if there is one.
-    """
+    """ 
+    # Check the two edge cases (the diagonals)
+    
+    d1 = [board[i][i] for i in range(len(board[0]))]
+    win_check_x = all(elem == X for elem in d1)
+    win_check_O = all(elem == O for elem in d1)
+    if(win_check_x or win_check_O):
+        return X *win_check_x + O*win_check_O
 
-    for column in range(0,len(board[0])):
-        if(column == 0):
-            ### Check all three possibilities at this position
-            col = [board[i][i]  for i in range(len(board[0]))]
-            if(all(elem == X for elem in board[0][:]) or all(elem == O for elem in board[0][:])):
-                return X*all(elem == X for elem in board[0][:]) + O*all(elem == O for elem in board[0][:])
+    d2 = [board[i][len(board)-1 -i] for i in range(len(board[0]))]
+    win_check_x = all(elem == X for elem in d2)
+    win_check_O = all(elem == O for elem in d2)
+    if(win_check_x or win_check_O):
+        return X *win_check_x + O*win_check_O
+    
+    for column in range(len(board[0])):
+        win_check_x = all(elem == X for elem in board[:, column])
+        win_check_O = all(elem == O for elem in board[:, column])
+        if(win_check_x or win_check_O):
+            return X *win_check_x + O*win_check_O
 
-            elif(all(elem == X for elem in board[:][0]) or all(elem == O for elem in board[:][0])):
-                return X*all(elem == X for elem in board[:][0]) + O*all(elem == O for elem in board[:][0])
-
-            elif(all(elem == X for elem in col) or all(elem == O for elem in col)):
-                ## check lead diagonal
-                return X*all(elem == X for elem in col) + O*all(elem == O for elem in col)
-
-        elif(column ==len(board[0])):
-            col = [board[i][len(board[0])-1 -i]  for i in range(len(board[0]))]
-            if(all(elem == X for elem in col) or all(elem == O for elem in col)):
-                return X*all(elem == X for elem in col) + O*all(elem == O for elem in col)
-        else:
-            if(all(elem == X for elem in board[0][column]) or all(elem == O for elem in board[0][column])):
-                return X*all(elem == X for elem in board[0][column]) + O*all(elem == O for elem in board[0][column])
-
-    for row in range(1, len(board[0])):
-        if(all(elem == X for elem in board[row]) or all(elem == O for elem in board[row])):
-            return X*all(elem == X for elem in board[row]) + O*all(elem == O for elem in board[row])
+    for row in range(len(board[0])):
+        win_check_x = all(elem == X for elem in board[row, :])
+        win_check_O = all(elem == O for elem in board[row, :])
+        if(win_check_x or win_check_O):
+            return X *win_check_x + O*win_check_O
 
     return None
 
@@ -110,7 +110,10 @@ def terminal(board):
     """
     Returns True if game is over, False otherwise.
     """
-    return winner(board)
+    if((winner(board) == X) or (winner(board) == O)):
+        return True
+    else:
+        return False
     
 
 
@@ -131,3 +134,10 @@ def minimax(board):
     Returns the optimal action for the current player on the board.
     """
     raise NotImplementedError
+
+
+if __name__ == "__main__":
+    board = initial_state()
+    print("Player: ",player(board))
+    print("Actions: ",actions(board))
+    print("Wineer: ",winner(board))

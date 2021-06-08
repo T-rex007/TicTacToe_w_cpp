@@ -1,7 +1,9 @@
-# TicTacToe_w_cpp
+# TicTacToe Game
+This Repo contains 
+- Simple Game with c++ From Udacity's c++ for Programmers course
+- Tictacetoe game implemted with MiniMax which is a decision rule used in AIto minimizepossible loss for a works case scenario, in this case its a recusrive algorithm for choosing the next move in a game.
 
-Simple Game with c++ From Udacity's c++ for programmers course 
-https://classroom.udacity.com/courses/ud210
+## Simple Game with c++ From Udacity's c++ for Programmers course
 
 For this programming quiz, I would like you to create a game called TicTacToe. In this version of the game you will need to:
 
@@ -16,3 +18,6 @@ If 4 'o's are found in the same col, row, diagonal, declare the 'o' user the win
 End the game and declare the winner.
 If the grid is filled (each player gets 8 turns) and there is not a row, column, diagonal 
 with 4 of the same symbol, the game is tied. Declare a tie game.
+
+## TicTacToe Game implemented with Minimax
+
